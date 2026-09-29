@@ -1,192 +1,414 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>老爹涼糕點單表</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Microsoft JhengHei", Arial, sans-serif; background: #fffaf5; padding: 20px; }
-    .dad-order-box { max-width: 720px; margin: 0 auto; background: white; border-radius: 18px; box-shadow: 0 12px 24px rgba(0,0,0,0.04); overflow: hidden; border: 1px solid #f0d9c6; }
-    .dad-order-header { background: #f4f0ee; color: #2f2a2a; font-size: 28px; font-weight: 800; text-align: center; padding: 22px 16px; border-bottom: 1px solid #f0d9c6; }
-    .dad-order-menu { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-    .dad-order-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid #f0d9c6; border-radius: 12px; background: #fffdfb; padding: 12px; }
-    .dad-order-name { font-size: 15px; font-weight: 700; color: #2f2a2a; }
-    .dad-order-name span { color: #d77649; font-size: 13px; margin-left: 6px; }
-    .dad-order-qty { display: flex; align-items: center; gap: 8px; }
-    .dad-order-btn { width: 30px; height: 30px; border: none; border-radius: 8px; background: #2d2d2d; color: white; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .dad-order-btn:hover { background: #4b4b4b; }
-    .dad-order-input { width: 42px; height: 30px; border: 1px solid #f0d9c6; border-radius: 8px; background: white; text-align: center; font-size: 16px; font-weight: 700; color: #2f2a2a; }
-    .dad-order-summary { margin: 20px 16px 0; padding: 16px 14px; background: #fff6ee; border: 1px solid #f0d9c6; border-radius: 12px; }
-    .dad-order-summary-title { font-size: 15px; font-weight: 800; color: #2f2a2a; margin-bottom: 10px; }
-    .dad-order-summary-row { display: flex; justify-content: space-between; font-size: 15px; color: #624b46; margin-bottom: 8px; }
-    .dad-order-summary-row strong { color: #d77649; font-size: 16px; }
-    .dad-order-summary-row.total { border-top: 1px dashed #f0d9c6; margin-top: 10px; padding-top: 10px; font-size: 18px; font-weight: 800; color: #2f2a2a; }
-    .dad-order-summary-row.total strong { font-size: 20px; }
-    .dad-order-form { padding: 18px 16px 0; }
-    .dad-order-form-title { font-size: 15px; font-weight: 800; color: #2f2a2a; margin-bottom: 12px; }
-    .dad-order-field { margin-bottom: 12px; }
-    .dad-order-field label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: #624b46; }
-    .dad-order-field input, .dad-order-field textarea { width: 100%; border: 1px solid #f0d9c6; border-radius: 10px; background: white; padding: 11px 12px; font-size: 14px; color: #2f2a2a; font-family: inherit; outline: none; }
-    .dad-order-field input:focus, .dad-order-field textarea:focus { border-color: #bbbbbb; }
-    .dad-order-field textarea { min-height: 84px; resize: vertical; }
-    .dad-order-copy-btn { width: calc(100% - 32px); margin: 20px 16px 8px; border: none; border-radius: 12px; background: #2d2d2d; color: #fff; padding: 14px 16px; font-size: 16px; font-weight: 800; cursor: pointer; }
-    .dad-order-copy-status { min-height: 20px; text-align: center; color: #2d9d50; font-size: 14px; font-weight: 700; }
-    .dad-order-line-link { display: block; margin: 6px 16px 18px; padding: 12px 10px; border-radius: 12px; text-align: center; text-decoration: none; font-size: 14px; font-weight: 700; border: 1px solid #dfeaf7; background: #f6fbff; color: #1a7fd6; }
-    @media (max-width: 560px) { .dad-order-item { flex-direction: column; align-items: flex-start; } .dad-order-qty { width: 100%; justify-content: flex-end; } }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
+      background: #f8f8f8;
+      color: #2c2c2c;
+    }
+
+    .order-shell {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #efefef;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+
+    .order-header {
+      background: #fafafa;
+      padding: 26px 20px 18px;
+      text-align: center;
+      border-bottom: 1px solid #efefef;
+    }
+
+    .order-header h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 30px);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #1f1f1f;
+    }
+
+    .order-body {
+      padding: 20px 16px 16px;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid #efefef;
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 12px;
+    }
+
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-weight: 700;
+      color: #2c2c2c;
+      font-size: 15px;
+    }
+
+    .menu-price {
+      color: #666;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .qty-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border: none;
+      border-radius: 8px;
+      background: #1f1f1f;
+      color: #ffffff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .qty-btn:hover {
+      background: #444;
+    }
+
+    .qty-input {
+      width: 42px;
+      height: 30px;
+      text-align: center;
+      border: 1px solid #e7e7e7;
+      border-radius: 8px;
+      background: #fff;
+      color: #222;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 0;
+    }
+
+    .summary-box {
+      margin-top: 22px;
+      padding: 16px 14px;
+      background: #fafafa;
+      border: 1px solid #efefef;
+      border-radius: 12px;
+    }
+
+    .summary-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #1d1d1d;
+    }
+
+    .sum-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      color: #444;
+      font-size: 15px;
+    }
+
+    .sum-row strong {
+      color: #1f1f1f;
+      font-size: 16px;
+    }
+
+    .sum-row.total {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #eaeaea;
+      font-size: 18px;
+      font-weight: 800;
+      color: #111;
+    }
+
+    .sum-row.total strong {
+      font-size: 20px;
+    }
+
+    .form-box {
+      margin-top: 22px;
+    }
+
+    .form-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #1d1d1d;
+    }
+
+    .field {
+      margin-bottom: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 14px;
+      color: #444;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #e7e7e7;
+      background: #fff;
+      border-radius: 10px;
+      padding: 11px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #222;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: #bdbdbd;
+    }
+
+    .field textarea {
+      min-height: 84px;
+      resize: vertical;
+    }
+
+    .copy-btn {
+      width: 100%;
+      margin-top: 18px;
+      border: none;
+      border-radius: 12px;
+      background: #1f1f1f;
+      color: #fff;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .copy-status {
+      min-height: 20px;
+      margin-top: 8px;
+      text-align: center;
+      color: #1f8f44;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .line-link {
+      display: block;
+      margin-top: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: #1a7fd6;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid #dfeaf7;
+      background: #f6fbff;
+      border-radius: 10px;
+      padding: 12px 10px;
+    }
+
+    @media (max-width: 560px) {
+      .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .qty-box {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="dad-order-box">
-    <div class="dad-order-header">🍡 老爹涼糕點單表</div>
-
-    <div class="dad-order-menu">
-      <div class="dad-order-item">
-        <div class="dad-order-name">多多玫瑰 <span>(100元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="100" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="dad-order-item">
-        <div class="dad-order-name">水果綜合 <span>(100元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="100" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="dad-order-item">
-        <div class="dad-order-name">布丁 <span>(100元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="100" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="dad-order-item">
-        <div class="dad-order-name">純杏仁 <span>(100元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="100" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="dad-order-item">
-        <div class="dad-order-name">泰奶口味 <span>(100元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="100" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="dad-order-item">
-        <div class="dad-order-name">巧克力 <span>(100元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="100" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="dad-order-item">
-        <div class="dad-order-name">玫瑰芋心 <span>(150元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="150" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
-
-      <div class="dad-order-item">
-        <div class="dad-order-name">布丁芋心 <span>(150元)</span></div>
-        <div class="dad-order-qty">
-          <button type="button" class="dad-order-btn minus">−</button>
-          <input type="text" class="dad-order-input" value="0" readonly data-price="150" />
-          <button type="button" class="dad-order-btn plus">+</button>
-        </div>
-      </div>
+  <div class="order-shell">
+    <div class="order-header">
+      <h1>🍡 老爹涼糕點單表</h1>
     </div>
 
-    <div class="dad-order-summary">
-      <div class="dad-order-summary-title">📋 訂單總表摘要</div>
-      <div class="dad-order-summary-row">
-        <span>總數量</span>
-        <strong><span id="dad-total-qty">0</span> 份</strong>
+    <div class="order-body">
+      <div class="menu-list">
+        <div class="menu-item">
+          <div class="menu-left">多多玫瑰 <span class="menu-price">(100元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-left">水果綜合 <span class="menu-price">(100元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-left">布丁 <span class="menu-price">(100元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-left">純杏仁 <span class="menu-price">(100元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-left">泰奶口味 <span class="menu-price">(100元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-left">巧克力 <span class="menu-price">(100元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-left">玫瑰芋心 <span class="menu-price">(150元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="150" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-left">布丁芋心 <span class="menu-price">(150元)</span></div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input type="text" class="qty-input" value="0" readonly data-price="150" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
       </div>
-      <div class="dad-order-summary-row total">
-        <span>總金額</span>
-        <strong>$<span id="dad-total-price">0</span> 元</strong>
+
+      <div class="summary-box">
+        <div class="summary-title">📋 訂單總表摘要</div>
+        <div class="sum-row">
+          <span>總數量</span>
+          <strong><span id="totalQty">0</span> 份</strong>
+        </div>
+        <div class="sum-row total">
+          <span>總金額</span>
+          <strong>$<span id="totalPrice">0</span> 元</strong>
+        </div>
       </div>
+
+      <div class="form-box">
+        <div class="form-title">📦 個人資料與其他備註</div>
+
+        <div class="field">
+          <label>收件姓名</label>
+          <input id="name" type="text" placeholder="請輸入姓名" />
+        </div>
+
+        <div class="field">
+          <label>電話</label>
+          <input id="phone" type="tel" placeholder="請輸入電話" />
+        </div>
+
+        <div class="field">
+          <label>到府服務地址</label>
+          <textarea id="address" placeholder="請輸入地址"></textarea>
+        </div>
+
+        <div class="field">
+          <label>7-11（寄冰）</label>
+          <input id="store711" type="text" placeholder="請輸入門市 / 店名" />
+        </div>
+
+        <div class="field">
+          <label>全家（寄冰）</label>
+          <input id="storeFamily" type="text" placeholder="請輸入門市 / 店名" />
+        </div>
+
+        <div class="field">
+          <label>沒有加購的資料 / 其他備註</label>
+          <textarea id="note" placeholder="請輸入其他備註"></textarea>
+        </div>
+      </div>
+
+      <button id="copyBtn" class="copy-btn" type="button">一鍵複製</button>
+      <div id="copyStatus" class="copy-status"></div>
+
+      <a class="line-link" href="https://line.me/" target="_blank" rel="noopener">👉 點擊前往官方 LINE 貼上訂單</a>
     </div>
-
-    <div class="dad-order-form">
-      <div class="dad-order-form-title">📦 個人資料與其他備註</div>
-
-      <div class="dad-order-field">
-        <label>收件姓名</label>
-        <input id="dad-name" type="text" placeholder="請輸入姓名" />
-      </div>
-
-      <div class="dad-order-field">
-        <label>電話</label>
-        <input id="dad-phone" type="tel" placeholder="請輸入電話" />
-      </div>
-
-      <div class="dad-order-field">
-        <label>到府服務地址</label>
-        <textarea id="dad-address" rows="3" placeholder="請輸入地址"></textarea>
-      </div>
-
-      <div class="dad-order-field">
-        <label>7-11（寄冰）</label>
-        <input id="dad-store-711" type="text" placeholder="請輸入門市 / 店名" />
-      </div>
-
-      <div class="dad-order-field">
-        <label>全家（寄冰）</label>
-        <input id="dad-store-family" type="text" placeholder="請輸入門市 / 店名" />
-      </div>
-
-      <div class="dad-order-field">
-        <label>沒有加購的資料 / 其他備註</label>
-        <textarea id="dad-note" rows="3" placeholder="請輸入其他備註"></textarea>
-      </div>
-    </div>
-
-    <button type="button" id="dad-copy-btn" class="dad-order-copy-btn">一鍵複製</button>
-    <div id="dad-copy-status" class="dad-order-copy-status"></div>
-
-    <a href="https://line.me/" target="_blank" rel="noopener" class="dad-order-line-link">👉 點擊前往官方 LINE 貼上訂單</a>
   </div>
 
   <script>
     (function () {
-      const inputs = document.querySelectorAll('.dad-order-input');
-      const minusButtons = document.querySelectorAll('.dad-order-btn.minus');
-      const plusButtons = document.querySelectorAll('.dad-order-btn.plus');
+      const inputs = document.querySelectorAll('.qty-input');
+      const minusButtons = document.querySelectorAll('.qty-btn.minus');
+      const plusButtons = document.querySelectorAll('.qty-btn.plus');
 
       function updateSummary() {
         let totalQty = 0;
         let totalPrice = 0;
+
         inputs.forEach(input => {
           const qty = Number(input.value) || 0;
           const price = Number(input.dataset.price) || 0;
           totalQty += qty;
           totalPrice += qty * price;
         });
-        document.getElementById('dad-total-qty').textContent = totalQty;
-        document.getElementById('dad-total-price').textContent = totalPrice;
+
+        document.getElementById('totalQty').textContent = totalQty;
+        document.getElementById('totalPrice').textContent = totalPrice;
       }
 
-      minusButtons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
+      minusButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
           const current = Number(inputs[index].value) || 0;
           if (current > 0) {
             inputs[index].value = current - 1;
@@ -195,49 +417,53 @@
         });
       });
 
-      plusButtons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
+      plusButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
           const current = Number(inputs[index].value) || 0;
           inputs[index].value = current + 1;
           updateSummary();
         });
       });
 
-      document.getElementById('dad-copy-btn').addEventListener('click', async function () {
-        const name = document.getElementById('dad-name').value.trim();
-        const phone = document.getElementById('dad-phone').value.trim();
-        const address = document.getElementById('dad-address').value.trim();
-        const store711 = document.getElementById('dad-store-711').value.trim();
-        const storeFamily = document.getElementById('dad-store-family').value.trim();
-        const note = document.getElementById('dad-note').value.trim();
+      document.getElementById('copyBtn').addEventListener('click', async function () {
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const store711 = document.getElementById('store711').value.trim();
+        const storeFamily = document.getElementById('storeFamily').value.trim();
+        const note = document.getElementById('note').value.trim();
 
         let text = '🍡 老爹涼糕點單表\n\n';
-        document.querySelectorAll('.dad-order-item').forEach(item => {
-          const itemName = item.querySelector('.dad-order-name').firstChild.textContent.trim();
-          const itemPrice = item.querySelector('.dad-order-input').dataset.price;
-          const itemQty = item.querySelector('.dad-order-input').value;
-          if (Number(itemQty) > 0) {
-            text += itemName + ' (' + itemPrice + '元) × ' + itemQty + '\n';
+
+        document.querySelectorAll('.menu-item').forEach((item) => {
+          const titleElement = item.querySelector('.menu-left');
+          const titleText = titleElement.firstChild.textContent.trim();
+          const price = item.querySelector('.qty-input').dataset.price;
+          const qty = item.querySelector('.qty-input').value;
+          if (Number(qty) > 0) {
+            text += `${titleText} (${price}元) × ${qty}\n`;
           }
         });
 
-        const totalQty = document.getElementById('dad-total-qty').textContent;
-        const totalPrice = document.getElementById('dad-total-price').textContent;
-        text += '\n📋 訂單總表摘要\n';
-        text += '總數量：' + totalQty + ' 份\n';
-        text += '總金額：$' + totalPrice + ' 元\n\n';
-        text += '📦 個人資料與其他備註\n';
-        text += '收件姓名：' + (name || '未填寫') + '\n';
-        text += '電話：' + (phone || '未填寫') + '\n';
-        text += '到府服務地址：' + (address || '未填寫') + '\n';
-        text += '7-11（寄冰）：' + (store711 || '未填寫') + '\n';
-        text += '全家（寄冰）：' + (storeFamily || '未填寫') + '\n';
-        text += '沒有加購的資料 / 其他備註：' + (note || '未填寫');
+        const totalQty = document.getElementById('totalQty').textContent;
+        const totalPrice = document.getElementById('totalPrice').textContent;
 
-        const statusEl = document.getElementById('dad-copy-status');
+        text += '\n📋 訂單總表摘要\n';
+        text += `總數量：${totalQty} 份\n`;
+        text += `總金額：$${totalPrice} 元\n\n`;
+        text += '📦 個人資料與其他備註\n';
+        text += `收件姓名：${name || '未填寫'}\n`;
+        text += `電話：${phone || '未填寫'}\n`;
+        text += `到府服務地址：${address || '未填寫'}\n`;
+        text += `7-11（寄冰）：${store711 || '未填寫'}\n`;
+        text += `全家（寄冰）：${storeFamily || '未填寫'}\n`;
+        text += `沒有加購的資料 / 其他備註：${note || '未填寫'}`;
+
+        const status = document.getElementById('copyStatus');
+
         try {
           await navigator.clipboard.writeText(text);
-          statusEl.textContent = '✅ 已複製訂單內容';
+          status.textContent = '✅ 已複製訂單內容';
         } catch (err) {
           const textarea = document.createElement('textarea');
           textarea.value = text;
@@ -245,9 +471,12 @@
           textarea.select();
           document.execCommand('copy');
           document.body.removeChild(textarea);
-          statusEl.textContent = '✅ 已複製訂單內容';
+          status.textContent = '✅ 已複製訂單內容';
         }
-        setTimeout(() => { statusEl.textContent = ''; }, 2200);
+
+        setTimeout(() => {
+          status.textContent = '';
+        }, 2200);
       });
 
       updateSummary();
