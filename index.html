@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老爹涼糕點單表</title>
+    <style>
+        /* Reset and base styles */
+        .lordaddy-order * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .lordaddy-order {
+            font-family: "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #fffaf5;
+            color: #333;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 28px 22px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .lordaddy-order h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            color: #7a3f2a;
+            font-size: 28px;
+        }
+
+        .lordaddy-order .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .lordaddy-order .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border: 1px solid #f0d8c7;
+            border-radius: 12px;
+            background: #fff8f2;
+            transition: all 0.2s ease;
+        }
+
+        .lordaddy-order .menu-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .lordaddy-order .product-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: #663a2d;
+        }
+
+        .lordaddy-order .price {
+            color: #d36b39;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .lordaddy-order .qty-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lordaddy-order .qty-btn {
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 8px;
+            background: #f0a75d;
+            color: white;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .lordaddy-order .qty-btn:hover {
+            background: #e8935f;
+            transform: scale(1.05);
+        }
+
+        .lordaddy-order .qty-btn:active {
+            transform: scale(0.98);
+        }
+
+        .lordaddy-order .qty-input {
+            width: 46px;
+            border: 1px solid #e5c7af;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 18px;
+            padding: 6px 4px;
+            color: #333;
+            background: #fff;
+            font-weight: 600;
+        }
+
+        /* Summary section */
+        .lordaddy-order .summary {
+            margin: 24px 0;
+            background: #fff7f0;
+            border-radius: 12px;
+            padding: 18px 16px;
+            border: 2px solid #f2d4ba;
+        }
+
+        .lordaddy-order .summary p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #4e3128;
+            font-weight: 700;
+        }
+
+        .lordaddy-order .summary span {
+            color: #e76b42;
+            font-size: 18px;
+        }
+
+        /* Form section */
+        .lordaddy-order .form-section {
+            margin-top: 26px;
+        }
+
+        .lordaddy-order .form-group {
+            margin-bottom: 16px;
+        }
+
+        .lordaddy-order label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #4e3128;
+            font-size: 15px;
+        }
+
+        .lordaddy-order input,
+        .lordaddy-order textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #e5d5c7;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 16px;
+            background: #fff;
+            color: #333;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .lordaddy-order input:focus,
+        .lordaddy-order textarea:focus {
+            outline: none;
+            border-color: #f0a75d;
+            box-shadow: 0 0 0 3px rgba(240, 167, 93, 0.1);
+        }
+
+        .lordaddy-order textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Buttons */
+        .lordaddy-order .copy-btn {
+            display: block;
+            width: 100%;
+            margin-top: 22px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff9d6c, #e76b42);
+            color: white;
+            padding: 15px 18px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lordaddy-order .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(231, 107, 66, 0.3);
+        }
+
+        .lordaddy-order .copy-btn:active {
+            transform: translateY(0);
+        }
+
+        .lordaddy-order .line-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: #1686d9;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        .lordaddy-order .line-link:hover {
+            color: #0c5eb8;
+            text-decoration: underline;
+        }
+
+        .lordaddy-order .copy-status {
+            text-align: center;
+            margin-top: 10px;
+            color: #2f9e44;
+            font-weight: 700;
+            min-height: 22px;
+            font-size: 14px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            .lordaddy-order {
+                margin: 10px;
+                padding: 18px 16px;
+            }
+
+            .lordaddy-order h2 {
+                font-size: 24px;
+                margin-bottom: 16px;
+            }
+
+            .lordaddy-order .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .lordaddy-order .product-info {
+                width: 100%;
+            }
+
+            .lordaddy-order .qty-box {
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .lordaddy-order .summary {
+                padding: 14px 12px;
+            }
+
+            .lordaddy-order .summary p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lordaddy-order">
+        <h2>🍡 老爹涼糕點單表</h2>
+
+        <div class="menu-list" id="menuList">
+            <div class="menu-item" data-name="多多玫瑰" data-price="100">
+                <div class="product-info">
+                    <span>多多玫瑰</span>
+                    <span class="price">(100元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-name="水果綜合" data-price="100">
+                <div class="product-info">
+                    <span>水果綜合</span>
+                    <span class="price">(100元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-name="布丁" data-price="100">
+                <div class="product-info">
+                    <span>布丁</span>
+                    <span class="price">(100元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-name="純杏仁" data-price="100">
+                <div class="product-info">
+                    <span>純杏仁</span>
+                    <span class="price">(100元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-name="泰奶口味" data-price="100">
+                <div class="product-info">
+                    <span>泰奶口味</span>
+                    <span class="price">(100元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-name="巧克力" data-price="100">
+                <div class="product-info">
+                    <span>巧克力</span>
+                    <span class="price">(100元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-name="玫瑰芋心" data-price="150">
+                <div class="product-info">
+                    <span>玫瑰芋心</span>
+                    <span class="price">(150元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="menu-item" data-name="布丁芋心" data-price="150">
+                <div class="product-info">
+                    <span>布丁芋心</span>
+                    <span class="price">(150元)</span>
+                </div>
+                <div class="qty-box">
+                    <button class="qty-btn minus" type="button">−</button>
+                    <input class="qty-input" type="number" value="0" min="0" readonly />
+                    <button class="qty-btn plus" type="button">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary">
+            <p>📋 訂單總表摘要</p>
+            <p>總數量：<span id="totalQty">0</span> 份</p>
+            <p>總金額：$<span id="totalPrice">0</span> 元</p>
+        </div>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>收件姓名：</label>
+                <input type="text" id="name" placeholder="請輸入姓名" />
+            </div>
+
+            <div class="form-group">
+                <label>電話：</label>
+                <input type="text" id="phone" placeholder="請輸入電話" />
+            </div>
+
+            <div class="form-group">
+                <label>到府服務地址：</label>
+                <textarea id="address" placeholder="請輸入地址"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>7-11（寄冰）：</label>
+                <input type="text" id="store711" placeholder="請輸入門市/店名" />
+            </div>
+
+            <div class="form-group">
+                <label>全家（寄冰）：</label>
+                <input type="text" id="storeFamily" placeholder="請輸入門市/店名" />
+            </div>
+
+            <div class="form-group">
+                <label>沒有加購的資料 / 其他備註：</label>
+                <textarea id="note" placeholder="請輸入其他備註"></textarea>
+            </div>
+        </div>
+
+        <button class="copy-btn" type="button" id="copyBtn">📋 一鍵複製完整訂單內容</button>
+        <div class="copy-status" id="copyStatus"></div>
+
+        <a class="line-link" href="https://line.me/" target="_blank" rel="noopener">
+            👉 點擊前往官方 LINE 貼上訂單
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuItems = document.querySelectorAll('.lordaddy-order .menu-item');
+            const totalQtyEl = document.getElementById('totalQty');
+            const totalPriceEl = document.getElementById('totalPrice');
+            const copyBtn = document.getElementById('copyBtn');
+            const copyStatus = document.getElementById('copyStatus');
+
+            function updateSummary() {
+                let totalQty = 0;
+                let totalPrice = 0;
+
+                menuItems.forEach(item => {
+                    const qty = Number(item.querySelector('.qty-input').value);
+                    const price = Number(item.dataset.price);
+                    totalQty += qty;
+                    totalPrice += qty * price;
+                });
+
+                totalQtyEl.textContent = totalQty;
+                totalPriceEl.textContent = totalPrice;
+            }
+
+            menuItems.forEach(item => {
+                const input = item.querySelector('.qty-input');
+                const plus = item.querySelector('.plus');
+                const minus = item.querySelector('.minus');
+
+                plus.addEventListener('click', function () {
+                    input.value = Number(input.value) + 1;
+                    updateSummary();
+                });
+
+                minus.addEventListener('click', function () {
+                    if (Number(input.value) > 0) {
+                        input.value = Number(input.value) - 1;
+                    }
+                    updateSummary();
+                });
+            });
+
+            function buildOrderText() {
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const store711 = document.getElementById('store711').value.trim();
+                const storeFamily = document.getElementById('storeFamily').value.trim();
+                const note = document.getElementById('note').value.trim();
+
+                let lines = [];
+                lines.push('🍡 老爹涼糕點單表');
+                lines.push('');
+
+                menuItems.forEach(item => {
+                    const nameText = item.dataset.name;
+                    const qty = Number(item.querySelector('.qty-input').value);
+                    const price = Number(item.dataset.price);
+                    if (qty > 0) {
+                        lines.push(`${nameText} (${price}元) x ${qty}`);
+                    }
+                });
+
+                lines.push('');
+                lines.push('📋 訂單總表摘要');
+                lines.push(`總數量：${totalQtyEl.textContent} 份`);
+                lines.push(`總金額：$${totalPriceEl.textContent} 元`);
+                lines.push('');
+                lines.push('📦 個人資料與其他備註');
+                if (name) lines.push(`收件姓名：${name}`);
+                if (phone) lines.push(`電話：${phone}`);
+                if (address) lines.push(`到府服務地址：${address}`);
+                if (store711) lines.push(`7-11（寄冰）：${store711}`);
+                if (storeFamily) lines.push(`全家（寄冰）：${storeFamily}`);
+                if (note) lines.push(`備註：${note}`);
+
+                return lines.join('\n');
+            }
+
+            copyBtn.addEventListener('click', async function () {
+                const text = buildOrderText();
+
+                try {
+                    await navigator.clipboard.writeText(text);
+                    copyStatus.textContent = '✅ 已複製訂單內容';
+                    setTimeout(() => {
+                        copyStatus.textContent = '';
+                    }, 3000);
+                } catch (err) {
+                    const temp = document.createElement('textarea');
+                    temp.value = text;
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(temp);
+                    copyStatus.textContent = '✅ 已複製訂單內容';
+                    setTimeout(() => {
+                        copyStatus.textContent = '';
+                    }, 3000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
