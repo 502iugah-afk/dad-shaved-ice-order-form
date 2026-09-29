@@ -6,445 +6,428 @@
   <title>老爹涼糕點單表</title>
 </head>
 <body>
-  <div class="dad-shop-form">
+  <div class="dad-order-lite">
     <div class="panel">
-      <div class="hero">
-        <div class="hero-icon">🍡</div>
-        <h2>老爹涼糕點單表</h2>
+      <div class="title">🍡 老爹涼糕點單表</div>
+
+      <div class="menu">
+        <div class="menu-item">
+          <div class="item-name">
+            <span>多多玫瑰</span>
+            <span class="price-tag">(100元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-name">
+            <span>水果綜合</span>
+            <span class="price-tag">(100元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-name">
+            <span>布丁</span>
+            <span class="price-tag">(100元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-name">
+            <span>純杏仁</span>
+            <span class="price-tag">(100元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-name">
+            <span>泰奶口味</span>
+            <span class="price-tag">(100元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-name">
+            <span>巧克力</span>
+            <span class="price-tag">(100元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="100" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-name">
+            <span>玫瑰芋心</span>
+            <span class="price-tag">(150元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="150" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-name">
+            <span>布丁芋心</span>
+            <span class="price-tag">(150元)</span>
+          </div>
+          <div class="qty-box">
+            <button type="button" class="qty-btn minus">−</button>
+            <input class="qty-input" type="text" value="0" readonly data-price="150" />
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
       </div>
 
-      <div class="menu" id="menuList"></div>
-
-      <div class="summary-box">
-        <div class="summary-title">訂單總表摘要</div>
-        <div class="summary-row">
+      <div class="summary">
+        <div class="summary-head">訂單總表摘要</div>
+        <div class="sum-row">
           <span>總數量</span>
           <strong><span id="totalQty">0</span> 份</strong>
         </div>
-        <div class="summary-row total">
+        <div class="sum-row total">
           <span>總金額</span>
           <strong>$<span id="totalPrice">0</span> 元</strong>
         </div>
       </div>
 
-      <div class="info-box">
-        <div class="section-header">個人資料與其他備註</div>
+      <div class="form">
+        <div class="label">收件姓名</div>
+        <input id="name" type="text" placeholder="請輸入姓名" />
 
-        <div class="field">
-          <label>收件姓名</label>
-          <input id="name" type="text" placeholder="請輸入姓名" />
-        </div>
+        <div class="label">電話</div>
+        <input id="phone" type="tel" placeholder="請輸入電話" />
 
-        <div class="field">
-          <label>電話</label>
-          <input id="phone" type="tel" placeholder="請輸入電話" />
-        </div>
+        <div class="label">到府服務地址</div>
+        <textarea id="address" rows="3" placeholder="請輸入地址"></textarea>
 
-        <div class="field">
-          <label>到府服務地址</label>
-          <textarea id="address" rows="3" placeholder="請輸入地址"></textarea>
-        </div>
+        <div class="label">7-11（寄冰）</div>
+        <input id="store711" type="text" placeholder="請輸入門市 / 店名" />
 
-        <div class="field">
-          <label>7-11（寄冰）</label>
-          <input id="store711" type="text" placeholder="請輸入門市 / 店名" />
-        </div>
+        <div class="label">全家（寄冰）</div>
+        <input id="storeFamily" type="text" placeholder="請輸入門市 / 店名" />
 
-        <div class="field">
-          <label>全家（寄冰）</label>
-          <input id="storeFamily" type="text" placeholder="請輸入門市 / 店名" />
-        </div>
-
-        <div class="field">
-          <label>沒有加購的資料 / 其他備註</label>
-          <textarea id="note" rows="3" placeholder="請輸入其他備註"></textarea>
-        </div>
+        <div class="label">沒有加購的資料 / 其他備註</div>
+        <textarea id="note" rows="3" placeholder="請輸入其他備註"></textarea>
       </div>
 
-      <button id="copyBtn" type="button" class="copy-btn">一鍵複製</button>
+      <button id="copyBtn" class="copy-btn" type="button">一鍵複製</button>
       <div id="copyStatus" class="copy-status"></div>
 
-      <a href="https://line.me/" target="_blank" rel="noopener" class="line-btn">👉 點擊前往官方 LINE 貼上訂單</a>
+      <a href="https://line.me/" target="_blank" rel="noopener" class="line-link">👉 點擊前往官方 LINE 貼上訂單</a>
     </div>
   </div>
 
   <style>
-    .dad-shop-form {
-      --bg: #fffaf5;
+    .dad-order-lite {
+      --bg: #faf7f3;
       --panel: #ffffff;
-      --soft: #fff3e8;
-      --card: #fff9f4;
-      --accent: #f39a5c;
-      --accent-dark: #e66b43;
-      --text: #3d2b25;
-      --sub: #6a4a40;
-      --line: #f3d6c0;
-      --success: #2e9d4a;
-      --shadow: 0 18px 42px rgba(122, 63, 42, 0.08);
+      --soft: #fff8f3;
+      --line: #eee0d5;
+      --text: #3a2b2a;
+      --muted: #5f4b46;
+      --accent: #d97a4a;
+      --accent-dark: #bf6036;
+      --success: #2d9d50;
       font-family: "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
-      background: linear-gradient(180deg, #fffaf5 0%, #fff1e3 100%);
-      padding: 20px 12px;
+      background: var(--bg);
+      padding: 18px 12px;
+    }
+
+    .dad-order-lite * {
       box-sizing: border-box;
     }
 
-    .dad-shop-form * {
-      box-sizing: border-box;
-    }
-
-    .dad-shop-form .panel {
+    .dad-order-lite .panel {
       max-width: 720px;
       margin: 0 auto;
       background: var(--panel);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
+      border: 1px solid #f0e3d8;
+      border-radius: 18px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.04);
       overflow: hidden;
-      border: 1px solid rgba(243, 154, 92, 0.18);
     }
 
-    .dad-shop-form .hero {
-      background: linear-gradient(135deg, #ff9d6c 0%, #e76b42 100%);
-      color: #fff;
+    .dad-order-lite .title {
+      background: #f4f1ed;
+      color: var(--text);
+      font-size: clamp(24px, 3vw, 28px);
+      font-weight: 800;
       text-align: center;
-      padding: 28px 20px 22px;
-    }
-
-    .dad-shop-form .hero-icon {
-      font-size: 42px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .dad-shop-form .hero h2 {
-      margin: 0;
-      font-size: clamp(24px, 4vw, 30px);
-      font-weight: 900;
+      padding: 22px 16px 18px;
+      border-bottom: 1px solid var(--line);
       letter-spacing: 0.04em;
     }
 
-    .dad-shop-form .menu {
-      padding: 24px 18px 0;
+    .dad-order-lite .menu {
+      padding: 18px 16px 0;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .dad-shop-form .menu-item {
+    .dad-order-lite .menu-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 14px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 12px;
+      background: #fffdfb;
+      padding: 12px 12px;
     }
 
-    .dad-shop-form .menu-item:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.04);
-    }
-
-    .dad-shop-form .item-name {
+    .dad-order-lite .item-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      color: var(--sub);
-      font-size: 15px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
-    .dad-shop-form .price-tag {
+    .dad-order-lite .price-tag {
       color: var(--accent-dark);
       font-size: 13px;
       font-weight: 700;
     }
 
-    .dad-shop-form .qty-box {
+    .dad-order-lite .qty-box {
       display: flex;
       align-items: center;
       gap: 8px;
-      flex-shrink: 0;
     }
 
-    .dad-shop-form .qty-btn {
-      width: 32px;
-      height: 32px;
+    .dad-order-lite .qty-btn {
+      width: 30px;
+      height: 30px;
       border: none;
-      border-radius: 9px;
-      background: var(--accent);
-      color: white;
-      font-size: 26px;
+      border-radius: 8px;
+      background: #2d2d2d;
+      color: #fff;
+      font-size: 22px;
       line-height: 1;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0;
     }
 
-    .dad-shop-form .qty-btn:hover {
-      background: var(--accent-dark);
+    .dad-order-lite .qty-btn:hover {
+      background: #474747;
     }
 
-    .dad-shop-form .qty-btn:active {
-      transform: scale(0.96);
-    }
-
-    .dad-shop-form .qty-input {
+    .dad-order-lite .qty-input {
       width: 42px;
-      height: 34px;
+      height: 30px;
       border: 1px solid var(--line);
-      border-radius: 9px;
-      background: #fff;
-      color: var(--text);
+      border-radius: 8px;
       text-align: center;
-      font-size: 18px;
+      background: #fff;
+      font-size: 16px;
       font-weight: 700;
+      color: var(--text);
       padding: 0;
     }
 
-    .dad-shop-form .summary-box {
+    .dad-order-lite .summary {
+      margin: 20px 16px 0;
+      padding: 16px 14px;
       background: var(--soft);
-      border: 2px solid #f5d9ba;
-      border-radius: 18px;
-      margin: 24px 18px 0;
-      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
     }
 
-    .dad-shop-form .summary-title {
-      font-size: 16px;
+    .dad-order-lite .summary-head {
+      font-size: 15px;
       font-weight: 800;
-      color: #7a3f2a;
-      margin-bottom: 12px;
+      color: var(--text);
+      margin-bottom: 10px;
     }
 
-    .dad-shop-form .summary-row {
+    .dad-order-lite .sum-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      color: var(--text);
       font-size: 15px;
+      color: var(--muted);
       margin-bottom: 8px;
     }
 
-    .dad-shop-form .summary-row strong {
+    .dad-order-lite .sum-row strong {
       color: var(--accent-dark);
       font-size: 16px;
     }
 
-    .dad-shop-form .summary-row.total {
-      margin-top: 10px;
+    .dad-order-lite .sum-row.total {
+      border-top: 1px dashed var(--line);
       padding-top: 10px;
-      border-top: 1px dashed #e7c8a4;
-      font-size: 18px;
+      margin-top: 10px;
       font-weight: 800;
+      color: var(--text);
     }
 
-    .dad-shop-form .summary-row.total strong {
+    .dad-order-lite .sum-row.total strong {
       font-size: 20px;
     }
 
-    .dad-shop-form .info-box {
-      padding: 22px 18px 0;
+    .dad-order-lite .form {
+      padding: 18px 16px 0;
     }
 
-    .dad-shop-form .section-header {
-      color: #7a3f2a;
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .dad-shop-form .field {
-      margin-bottom: 14px;
-    }
-
-    .dad-shop-form .field label {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--sub);
+    .dad-order-lite .label {
       font-size: 14px;
+      color: var(--muted);
       font-weight: 700;
+      margin-bottom: 6px;
+      margin-top: 10px;
     }
 
-    .dad-shop-form .field input,
-    .dad-shop-form .field textarea {
+    .dad-order-lite .form input,
+    .dad-order-lite .form textarea {
       width: 100%;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 11px 12px;
+      border-radius: 10px;
       background: #fff;
-      color: var(--text);
+      padding: 11px 12px;
       font-size: 14px;
       font-family: inherit;
+      color: var(--text);
       outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .dad-shop-form .field input:focus,
-    .dad-shop-form .field textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(243, 154, 92, 0.12);
+    .dad-order-lite .form input:focus,
+    .dad-order-lite .form textarea:focus {
+      border-color: #8d8d8d;
     }
 
-    .dad-shop-form .field textarea {
+    .dad-order-lite .form textarea {
       min-height: 84px;
       resize: vertical;
     }
 
-    .dad-shop-form .copy-btn {
-      margin: 18px 18px 8px;
-      width: calc(100% - 36px);
+    .dad-order-lite .copy-btn {
+      width: calc(100% - 32px);
+      margin: 20px 16px 8px;
       border: none;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #ff9d6c 0%, #e76b42 100%);
+      border-radius: 12px;
+      background: #2b2b2b;
       color: #fff;
+      padding: 14px 16px;
       font-size: 16px;
       font-weight: 800;
-      padding: 15px 18px;
       cursor: pointer;
-      box-shadow: 0 10px 18px rgba(231, 107, 66, 0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .dad-shop-form .copy-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 22px rgba(231, 107, 66, 0.24);
-    }
-
-    .dad-shop-form .copy-btn:active {
-      transform: translateY(0);
-    }
-
-    .dad-shop-form .copy-status {
+    .dad-order-lite .copy-status {
       min-height: 20px;
       text-align: center;
       color: var(--success);
       font-size: 14px;
       font-weight: 700;
-      margin-bottom: 8px;
     }
 
-    .dad-shop-form .line-btn {
+    .dad-order-lite .line-link {
       display: block;
-      margin: 0 18px 22px;
       text-align: center;
+      margin: 6px 16px 18px;
+      padding: 12px 10px;
+      border-radius: 10px;
+      border: 1px solid #dfeaf7;
+      background: #f6fbff;
+      color: #1a7fd6;
       text-decoration: none;
-      color: #1686d9;
       font-size: 14px;
       font-weight: 700;
-      border: 1px solid rgba(22, 134, 217, 0.4);
-      background: #f7fbff;
-      padding: 12px 14px;
-      border-radius: 12px;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .dad-shop-form .line-btn:hover {
-      background: #edf6ff;
-      color: #0b65b9;
     }
 
     @media (max-width: 560px) {
-      .dad-shop-form .menu-item {
+      .dad-order-lite .menu-item {
         align-items: flex-start;
         flex-direction: column;
         gap: 12px;
       }
 
-      .dad-shop-form .qty-box {
+      .dad-order-lite .qty-box {
         width: 100%;
         justify-content: flex-end;
-      }
-
-      .dad-shop-form .summary-row,
-      .dad-shop-form .summary-row.total {
-        font-size: 14px;
-      }
-
-      .dad-shop-form .summary-row.total strong {
-        font-size: 18px;
       }
     }
   </style>
 
   <script>
     (function () {
-      const menuData = [
-        { name: '多多玫瑰', price: 100 },
-        { name: '水果綜合', price: 100 },
-        { name: '布丁', price: 100 },
-        { name: '純杏仁', price: 100 },
-        { name: '泰奶口味', price: 100 },
-        { name: '巧克力', price: 100 },
-        { name: '玫瑰芋心', price: 150 },
-        { name: '布丁芋心', price: 150 }
-      ];
+      const inputs = document.querySelectorAll('.qty-input');
+      const minusButtons = document.querySelectorAll('.qty-btn.minus');
+      const plusButtons = document.querySelectorAll('.qty-btn.plus');
 
-      const quantities = new Array(menuData.length).fill(0);
-      const menuList = document.getElementById('menuList');
-
-      function renderMenu() {
-        menuList.innerHTML = '';
-
-        menuData.forEach((item, index) => {
-          const itemEl = document.createElement('div');
-          itemEl.className = 'menu-item';
-
-          itemEl.innerHTML = `
-            <div class="item-name">
-              <span>${item.name}</span>
-              <span class="price-tag">(${item.price}元)</span>
-            </div>
-            <div class="qty-box">
-              <button type="button" class="qty-btn minus" aria-label="減少數量">−</button>
-              <input class="qty-input" type="text" value="0" readonly />
-              <button type="button" class="qty-btn plus" aria-label="增加數量">+</button>
-            </div>
-          `;
-
-          const minusBtn = itemEl.querySelector('.minus');
-          const plusBtn = itemEl.querySelector('.plus');
-          const qtyInput = itemEl.querySelector('.qty-input');
-
-          minusBtn.addEventListener('click', () => {
-            if (quantities[index] > 0) {
-              quantities[index] -= 1;
-              updateUI();
-            }
-          });
-
-          plusBtn.addEventListener('click', () => {
-            quantities[index] += 1;
-            updateUI();
-          });
-
-          qtyInput.value = quantities[index];
-          menuList.appendChild(itemEl);
-        });
-      }
-
-      function updateUI() {
-        const allInputs = document.querySelectorAll('.qty-input');
+      function updateSummary() {
         let totalQty = 0;
         let totalPrice = 0;
 
-        menuData.forEach((item, index) => {
-          const qty = quantities[index];
+        inputs.forEach(input => {
+          const qty = parseInt(input.value) || 0;
+          const price = parseInt(input.getAttribute('data-price')) || 0;
           totalQty += qty;
-          totalPrice += qty * item.price;
-          allInputs[index].value = qty;
+          totalPrice += qty * price;
         });
 
         document.getElementById('totalQty').textContent = totalQty;
         document.getElementById('totalPrice').textContent = totalPrice;
       }
 
-      function buildOrderText() {
+      minusButtons.forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+          const input = inputs[idx];
+          const current = parseInt(input.value) || 0;
+          if (current > 0) {
+            input.value = current - 1;
+            updateSummary();
+          }
+        });
+      });
+
+      plusButtons.forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+          const input = inputs[idx];
+          const current = parseInt(input.value) || 0;
+          input.value = current + 1;
+          updateSummary();
+        });
+      });
+
+      document.getElementById('copyBtn').addEventListener('click', async function () {
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
         const address = document.getElementById('address').value.trim();
@@ -452,36 +435,29 @@
         const storeFamily = document.getElementById('storeFamily').value.trim();
         const note = document.getElementById('note').value.trim();
 
-        let lines = ['🍡 老爹涼糕點單表', ''];
-
-        menuData.forEach((item, index) => {
-          const qty = quantities[index];
+        let text = '🍡 老爹涼糕點單表\n\n';
+        
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach((item, idx) => {
+          const name = item.querySelector('.item-name span').textContent;
+          const price = item.querySelector('input').getAttribute('data-price');
+          const qty = item.querySelector('input').value;
           if (qty > 0) {
-            lines.push(`${item.name} (${item.price}元) × ${qty}`);
+            text += `${name} (${price}元) × ${qty}\n`;
           }
         });
 
-        const totalQty = quantities.reduce((sum, n) => sum + n, 0);
-        const totalPrice = menuData.reduce((sum, item, index) => sum + quantities[index] * item.price, 0);
+        text += `\n📋 訂單總表摘要\n`;
+        text += `總數量：${document.getElementById('totalQty').textContent} 份\n`;
+        text += `總金額：$${document.getElementById('totalPrice').textContent} 元\n\n`;
+        text += `📦 個人資料與其他備註\n`;
+        text += `收件姓名：${name || '未填寫'}\n`;
+        text += `電話：${phone || '未填寫'}\n`;
+        text += `到府服務地址：${address || '未填寫'}\n`;
+        text += `7-11（寄冰）：${store711 || '未填寫'}\n`;
+        text += `全家（寄冰）：${storeFamily || '未填寫'}\n`;
+        text += `沒有加購的資料 / 其他備註：${note || '未填寫'}`;
 
-        lines.push('');
-        lines.push('📋 訂單總表摘要');
-        lines.push(`總數量：${totalQty} 份`);
-        lines.push(`總金額：$${totalPrice} 元`);
-        lines.push('');
-        lines.push('📦 個人資料與其他備註');
-        lines.push(`收件姓名：${name || '未填寫'}`);
-        lines.push(`電話：${phone || '未填寫'}`);
-        lines.push(`到府服務地址：${address || '未填寫'}`);
-        lines.push(`7-11（寄冰）：${store711 || '未填寫'}`);
-        lines.push(`全家（寄冰）：${storeFamily || '未填寫'}`);
-        lines.push(`沒有加購的資料 / 其他備註：${note || '未填寫'}`);
-
-        return lines.join('\n');
-      }
-
-      document.getElementById('copyBtn').addEventListener('click', async function () {
-        const text = buildOrderText();
         const statusEl = document.getElementById('copyStatus');
 
         try {
@@ -499,11 +475,10 @@
 
         setTimeout(() => {
           statusEl.textContent = '';
-        }, 2500);
+        }, 2200);
       });
 
-      renderMenu();
-      updateUI();
+      updateSummary();
     })();
   </script>
 </body>
